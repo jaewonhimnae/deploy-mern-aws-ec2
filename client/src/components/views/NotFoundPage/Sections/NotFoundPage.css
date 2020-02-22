@@ -1,0 +1,13 @@
+canvas {
+    display: block;
+    margin: 0 auto 1.5em auto;
+    width: 100%;
+    height: auto;
+    -webkit-tap-highlight-color: transparent;
+}
+.wrap {
+    margin: auto;
+    padding: 1.5em;
+    max-width: 37.5em;
+    font-size: calc(16px + (20 - 16)*(100vw - 320px)/(1024 - 320));
+}
