@@ -39,18 +39,13 @@ function RegisterPage(props) {
 
     <Formik
       initialValues={{
-        account: '',
         email: '',
-        lastName: '',
         name: '',
         password: '',
         confirmPassword: '',
         company: ''
       }}
       validationSchema={Yup.object().shape({
-        account: Yup.string()
-          .required('Account is required')
-          .matches(accountRegExp, 'Only 3 ~ 20 Alphabetic, _, -, . , @'),
         name: Yup.string()
           .required('Name is required'),
         email: Yup.string()
@@ -66,13 +61,11 @@ function RegisterPage(props) {
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           let dataToSubmit = {
-            account: values.account,
             email: values.email,
             password: values.password,
             name: values.name,
             // lastname: values.lastname,
             image: `uploads/images/no-user.svg`,
-            company: parseInt(values.company, 10)
           };
 
           dispatch(registerUser(dataToSubmit)).then(response => {
@@ -102,23 +95,6 @@ function RegisterPage(props) {
             <Title level={2}>Sign up </Title>
 
             <Form style={{ minWidth: '375px' }} {...formItemLayout} onSubmit={handleSubmit} >
-
-              <Form.Item required label="account">
-                <Input
-                  id="account"
-                  placeholder="account"
-                  type="text"
-                  value={values.account}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={
-                    errors.account && touched.account ? 'text-input error' : 'text-input'
-                  }
-                />
-                {errors.account && touched.account && (
-                  <div className="input-feedback">{errors.account}</div>
-                )}
-              </Form.Item>
 
               <Form.Item required label="name">
                 <Input

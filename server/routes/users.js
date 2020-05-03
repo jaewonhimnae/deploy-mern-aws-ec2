@@ -20,17 +20,17 @@ router.get("/auth", auth, (req, res) => {
     });
 });
 
-router.post("/register", (req, res) => {
+router.post("/register", async (req, res) => {
 
     const user = new User(req.body);
-
-    user.save((err, doc) => {
-        console.log(doc)
-        if (err) return res.json({ success: false, err });
+    try {
+        await user.save()
         return res.status(200).json({
             success: true
         });
-    });
+    } catch (err) {
+        console.log(err)
+    }
 });
 
 router.post("/login", (req, res) => {
@@ -58,13 +58,15 @@ router.post("/login", (req, res) => {
     });
 });
 
-router.get("/logout", auth, (req, res) => {
-    User.findOneAndUpdate({ _id: req.user._id }, { token: "", tokenExp: "" }, (err, doc) => {
-        if (err) return res.json({ success: false, err });
+router.get("/logout", auth, async (req, res) => {
+    try {
+        await User.findOneAndUpdate({ _id: req.user._id }, { token: "", tokenExp: "" })
         return res.status(200).send({
             success: true
         });
-    });
+    } catch (error) {
+        console.log(error)
+    }
 });
 
 module.exports = router;

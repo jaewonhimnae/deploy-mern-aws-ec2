@@ -21,12 +21,12 @@ export default function (ComposedClass, reload, adminRoute = null) {
                     }
                     else {
                         if (reload === false) {
-                            props.history.push('/posts')
+                            props.history.push('/')
                         }
                     }
                 }
             })
-            
+
         }, [dispatch, props.history, user.googleAuth])
 
         return (

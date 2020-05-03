@@ -6,19 +6,29 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import config from './config/key';
+import helmet from 'helmet';
 
 const app = express();
 
 mongoose.connect(config.mongoURI,
-  { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true
+  })
   .then(() => console.log('MongoDB Connected...'))
-  .catch(err => console.log(err));
+  .catch(err => console.error(err));
 
 //to not get any deprecation warning or error
 //support parsing of application/x-www-form-urlencoded post data
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
 app.use(cookieParser());
+
+// Helmet helps you secure your Express apps by setting various HTTP headers. 
+app.use(helmet())
 
 // Logger Middleware
 app.use(morgan('dev'));

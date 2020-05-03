@@ -6,12 +6,6 @@ const moment = require("moment");
 const crypto = require('crypto');
 
 const userSchema = mongoose.Schema({
-    account: {
-        type: String,
-        maxlength: 20,
-        unique: true,
-        trim: true,
-    },
     name: {
         type: String,
         maxlength: 50
@@ -25,29 +19,18 @@ const userSchema = mongoose.Schema({
         type: String,
         minglength: 5
     },
-    // lastname: {
-    //     type:String,
-    //     maxlength: 50
-    // },
     role: {
         type: Number,
         default: 0
     },
     image: String,
-    token: {
-        type: String,
-    },
-    tokenExp: {
-        type: Number
-    },
-    resetToken: {
-        type: String
-    },
-    resetTokenExp: {
-        type: Number
-    }
+    token: String,
+    tokenExp: Number,
+    resetToken: String,
+    resetTokenExp: Number
 })
-
+//role === 1   normal user 
+//role === 0   admin user
 
 userSchema.pre('save', function (next) {
     var user = this;
@@ -115,6 +98,21 @@ userSchema.methods.generateResetToken = function (cb) {
         })
     })
 }
+
+/**
+ * Helper method for getting user's gravatar.
+ */
+userSchema.methods.gravatar = function gravatar(size) {
+    if (!size) {
+        size = 200;
+    }
+    if (!this.email) {
+        return `https://gravatar.com/avatar/?s=${size}&d=retro`;
+    }
+    const md5 = crypto.createHash('md5').update(this.email).digest('hex');
+    return `https://gravatar.com/avatar/${md5}?s=${size}&d=retro`;
+};
+
 
 const User = mongoose.model('User', userSchema);
 
