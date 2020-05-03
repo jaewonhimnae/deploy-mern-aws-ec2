@@ -1,32 +1,34 @@
-const express = require("express");
-const path = require("path");
-const app = express();
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-const cors = require('cors');
+import express from 'express';
+import mongoose from 'mongoose';
+import path from 'path';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+import morgan from 'morgan';
+import config from './config/key';
 
-//Socket.io
-const server = require("http").createServer(app);
-const config = require("./config/key");
-const mongoose = require("mongoose");
-const connect = mongoose.connect(config.mongoURI,
+const app = express();
+
+mongoose.connect(config.mongoURI,
   { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
 
+//to not get any deprecation warning or error
+//support parsing of application/x-www-form-urlencoded post data
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.use(cors({
-  preflightContinue: true,
-  credentials: true,
-}));
-app.options('*', cors()) // include before other routes
+// Logger Middleware
+app.use(morgan('dev'));
+
+// CORS Middleware
+app.use(cors());
 
 app.use('/api/users', require('./routes/users'));
 
-//use this to show the image you have in node js server to client (react js)
+//use this to show static files you have in node js server to client (react js)
 //https://stackoverflow.com/questions/48914987/send-image-path-from-node-js-express-server-to-react-client
 app.use('/uploads', express.static('uploads'));
 
@@ -34,9 +36,10 @@ app.use('/uploads', express.static('uploads'));
 if (process.env.NODE_ENV === "production") {
 
   // Set static folder
+  // All the javascript and css files will be read and served from this folder
   app.use(express.static("client/build"));
 
-  // index.html for all page routes
+  // index.html for all page routes  html or routing and naviagtion
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
   });
@@ -44,6 +47,6 @@ if (process.env.NODE_ENV === "production") {
 
 const port = process.env.PORT || 5000
 
-server.listen(port, () => {
+app.listen(port, () => {
   console.log(`Server Running at ${port}`)
 });

@@ -34,7 +34,7 @@ router.post("/register", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
-    User.findOne({ account: req.body.account }, (err, user) => {
+    User.findOne({ email: req.body.email }, (err, user) => {
         if (!user)
             return res.json({
                 loginSuccess: false,
@@ -48,9 +48,10 @@ router.post("/login", (req, res) => {
             user.generateToken((err, user) => {
                 if (err) return res.status(400).send(err);
                 res.status(200).json({
-                    loginSuccess: true, userId: user._id,
-                    tokenExp: user.tokenExp, token: user.token,
-                    company: user.company
+                    loginSuccess: true,
+                    userId: user._id,
+                    tokenExp: user.tokenExp,
+                    token: user.token
                 });
             });
         });

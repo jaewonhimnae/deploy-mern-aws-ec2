@@ -17,16 +17,19 @@ import NotFoundPage from './views/NotFoundPage/NotFoundPage';
 function App() {
   return (
     <Suspense fallback={(<div>Loading...</div>)}>
-      <NavBar />
-      <div style={{ paddingTop: '69px', minHeight: 'calc(100vh - 80px)' }}>
+      <div className="wrapper">
+        <NavBar />
+        <div className="contentsWrapSpacer" />
         <Switch>
-          <Route exact path="/" component={Auth(LandingPage, null)} />
-          <Route exact path="/login" component={Auth(LoginPage, false)} />
-          <Route exact path="/register" component={Auth(RegisterPage, false)} />
+          <div className="contentsWrap">
+            <Route exact path="/" component={Auth(LandingPage, null)} />
+            <Route exact path="/login" component={Auth(LoginPage, false)} />
+            <Route exact path="/register" component={Auth(RegisterPage, false)} />
+          </div>
           <Route component={Auth(NotFoundPage, null)} />
         </Switch>
+        <Footer />
       </div>
-      <Footer />
     </Suspense>
   );
 }

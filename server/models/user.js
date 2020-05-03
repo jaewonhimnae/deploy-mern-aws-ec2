@@ -25,9 +25,6 @@ const userSchema = mongoose.Schema({
         type: String,
         minglength: 5
     },
-    company: {
-        type: Number,
-    },
     // lastname: {
     //     type:String,
     //     maxlength: 50
@@ -43,11 +40,11 @@ const userSchema = mongoose.Schema({
     tokenExp: {
         type: Number
     },
-    resetToken:{
-        type:String
+    resetToken: {
+        type: String
     },
-    resetTokenExp:{
-        type:Number
+    resetTokenExp: {
+        type: Number
     }
 })
 
@@ -102,19 +99,19 @@ userSchema.statics.findByToken = function (token, cb) {
     })
 }
 
-userSchema.methods.generateResetToken = function(cb){
+userSchema.methods.generateResetToken = function (cb) {
     var user = this;
 
-    crypto.randomBytes(20,function(err,buffer){
+    crypto.randomBytes(20, function (err, buffer) {
         var token = buffer.toString('hex');
         var today = moment().startOf('day').valueOf();
         var tomorrow = moment(today).endOf('day').valueOf();
 
         user.resetToken = token;
         user.resetTokenExp = tomorrow;
-        user.save(function(err,user){
-            if(err) return cb(err);
-            cb(null,user);
+        user.save(function (err, user) {
+            if (err) return cb(err);
+            cb(null, user);
         })
     })
 }

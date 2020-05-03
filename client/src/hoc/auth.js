@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { auth } from '../_actions/user_actions';
 import { useSelector, useDispatch } from "react-redux";
-
+import { headersConfig } from '../components/Config'
 export default function (ComposedClass, reload, adminRoute = null) {
     function AuthenticationCheck(props) {
 
@@ -10,7 +10,7 @@ export default function (ComposedClass, reload, adminRoute = null) {
 
         useEffect(() => {
 
-            dispatch(auth()).then(async response => {
+            dispatch(auth(headersConfig)).then(async response => {
                 if (await !response.payload.isAuth) {
                     if (reload) {
                         props.history.push('/login')

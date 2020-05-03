@@ -1,4 +1,4 @@
-@import "~antd/dist/antd.css";
+@import '~antd/dist/antd.css';
 
 .menu {
   padding: 0 20px;
@@ -6,13 +6,6 @@
   overflow: auto;
   box-shadow: 0 0 30px #f3f1f1;
   background-color: white;
-}
-
-
-@media screen and (max-width: 800px) {
-  .menu {
-    padding: 9px 20px;
-  }
 }
 
 .menu__logo {
@@ -27,7 +20,7 @@
 }
 
 .menu__container .ant-menu-item {
-  padding: 0;
+  padding: 0px 5px;
 }
 
 .menu__container .ant-menu-submenu-title {
@@ -57,7 +50,6 @@
   padding: 6px;
   margin-top: 8px;
   display: none !important; /* use of important to overwrite ant-btn */
-  background: white;
 }
 
 .menu_drawer .ant-drawer-body {
@@ -91,22 +83,4 @@
   .menu__logo a {
     padding: 10px 20px;
   }
-}
-
-
-.ant-menu-horizontal > .ant-menu-item:hover, .ant-menu-horizontal > .ant-menu-submenu:hover, .ant-menu-horizontal > .ant-menu-item-active, .ant-menu-horizontal > .ant-menu-submenu-active, .ant-menu-horizontal > .ant-menu-item-open, .ant-menu-horizontal > .ant-menu-submenu-open, .ant-menu-horizontal > .ant-menu-item-selected, .ant-menu-horizontal > .ant-menu-submenu-selected {
-  color: black !important;
-  border-bottom: 2px solid black !important;
-}
-
-a:hover {
-  color: black !important;
-}
-
-a:focus {
- color: black !important;
-}
-
-a {
-  color: gray !important;
 }

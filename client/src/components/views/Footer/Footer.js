@@ -1,11 +1,14 @@
 import React from "react";
 import './Footer.css';
-import { Icon } from 'antd';
+import {
+    SmileTwoTone
+} from '@ant-design/icons';
 
 function Footer() {
     return (
-        <footer style={{ textAlign: 'center', padding: '4rem 4rem 2rem 4rem' }}>
-            <Icon type="copyright" /> UCWare Co
+        <footer style={{ textAlign: 'center', padding: '1rem' }}>
+            By John Ahn   <SmileTwoTone />
+
         </footer>
     )
 }

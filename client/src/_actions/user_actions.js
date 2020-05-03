@@ -5,21 +5,21 @@ import {
     AUTH_USER,
     LOGOUT_USER,
 } from './types';
-import { BACK_SERVER_URL, TokenAndTokenExp } from '../components/Config.js';
+import { BACK_SERVER_URL, headersConfig } from '../components/Config.js';
 
-export function registerUser(dataToSubmit){
-    const request = axios.post(`${BACK_SERVER_URL}/api/users/register`,dataToSubmit)
+export function registerUser(dataToSubmit) {
+    const request = axios.post(`${BACK_SERVER_URL}/api/users/register`, dataToSubmit)
         .then(response => response.data);
-    
+
     return {
         type: REGISTER_USER,
         payload: request
     }
 }
 
-export function loginUser(dataToSubmit){
-    const request = axios.post(`${BACK_SERVER_URL}/api/users/login`,dataToSubmit)
-                .then(response => response.data);
+export function loginUser(dataToSubmit) {
+    const request = axios.post(`${BACK_SERVER_URL}/api/users/login`, dataToSubmit)
+        .then(response => response.data);
 
     return {
         type: LOGIN_USER,
@@ -27,9 +27,9 @@ export function loginUser(dataToSubmit){
     }
 }
 
-export function auth(){
-    const request = axios.get(`${BACK_SERVER_URL}/api/users/auth?${TokenAndTokenExp}`)
-    .then(response => response.data);
+export function auth() {
+    const request = axios.get(`${BACK_SERVER_URL}/api/users/auth`, headersConfig)
+        .then(response => response.data);
 
     return {
         type: AUTH_USER,
@@ -37,9 +37,9 @@ export function auth(){
     }
 }
 
-export function logoutUser(){
-    const request = axios.get(`${BACK_SERVER_URL}/api/users/logout?${TokenAndTokenExp}`)
-    .then(response => response.data);
+export function logoutUser() {
+    const request = axios.get(`${BACK_SERVER_URL}/api/users/logout`, headersConfig)
+        .then(response => response.data);
 
     return {
         type: LOGOUT_USER,

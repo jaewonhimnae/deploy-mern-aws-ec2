@@ -5,9 +5,15 @@ import { Drawer, Button, Icon } from 'antd';
 import './Sections/Navbar.css';
 import useReactRouter from 'use-react-router';
 
+
+import {
+  BarsOutlined
+} from '@ant-design/icons';
+
+
 function NavBar() {
   const [visible, setVisible] = useState(false)
-  const {  location } = useReactRouter();
+  const { location } = useReactRouter();
   const { pathname } = location
   // const [NavVisible, setNavVisible] = useState(true)
   const showDrawer = () => {
@@ -19,9 +25,9 @@ function NavBar() {
   };
 
   return (
-    <nav className="menu" style={{ position: 'fixed', zIndex: 5, width: '100%'}}>
+    <nav className="menu" style={{ position: 'fixed', zIndex: 5, width: '100%' }}>
       <div className="menu__logo">
-        <a href="/"><h1 style={{ marginBottom: 0, fontWeight: 'bold', marginTop: -5 }}>Hello</h1></a>
+        <a href="/">Starter</a>
       </div>
       <div className="menu__container">
         <div className="menu_left">
@@ -32,13 +38,12 @@ function NavBar() {
         </div>
         <Button
           className="menu__mobile-button"
-
           onClick={showDrawer}
         >
-          <Icon type="align-right" />
+          <BarsOutlined />
         </Button>
         <Drawer
-          title="UC VOC"
+          title="Drawer"
           placement="right"
           className="menu_drawer"
           closable={false}

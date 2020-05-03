@@ -1,8 +1,11 @@
 import React from 'react';
+import { FaCode } from "react-icons/fa";
+
 function LandingPage() {
     return (
         <div className="app">
-           <h1>Hello</h1> 
+            <FaCode style={{ fontSize: '4rem' }} /><br />
+            <span style={{ fontSize: '2rem' }}>Let's Start Coding!</span>
         </div>
     )
 }

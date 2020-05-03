@@ -3,8 +3,13 @@ import { withRouter } from "react-router-dom";
 import { loginUser } from "../../../_actions/user_actions";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Form, Icon, Input, Button, Checkbox, Typography } from 'antd';
+import { Form, Input, Button, Checkbox, Typography } from 'antd';
 import { useDispatch } from "react-redux";
+
+import {
+  UserOutlined,
+  LockOutlined
+} from '@ant-design/icons';
 
 
 const { Title } = Typography;
@@ -20,28 +25,27 @@ function LoginPage(props) {
     setRememberMe(!rememberMe)
   };
 
-  const initialAccount = localStorage.getItem("rememberMe") ? localStorage.getItem("rememberMe") : '';
+  const initialEmail = localStorage.getItem("rememberMe") ? localStorage.getItem("rememberMe") : '';
 
   return (
     <Formik
       initialValues={{
-        account: initialAccount,
+        email: initialEmail,
         password: '',
       }}
       validationSchema={Yup.object().shape({
-        account: Yup.string()
-          .required('account is required'),
-        // email: Yup.string()
-        //   .email('Email is invalid')
-        //   .required('Email is required'),
+        email: Yup.string()
+          .email('Email is invalid')
+          .required('Email is required'),
         password: Yup.string()
           .min(6, 'Password must be at least 6 characters')
           .required('Password is required'),
       })}
       onSubmit={(values, { setSubmitting }) => {
+
         setTimeout(() => {
           let dataToSubmit = {
-            account: values.account,
+            email: values.email,
             password: values.password
           };
 
@@ -51,21 +55,18 @@ function LoginPage(props) {
                 window.localStorage.setItem('x_token', response.payload.token);
                 window.localStorage.setItem('x_tokenExp', response.payload.tokenExp);
                 window.localStorage.setItem('userId', response.payload.userId);
-                console.log(response.payload)
-                window.localStorage.setItem('uc-voc-user-company', response.payload.company);
                 if (rememberMe === true) {
                   window.localStorage.setItem('rememberMe', values.id);
                 } else {
                   localStorage.removeItem('rememberMe');
                 }
-                window.location.reload()
-                // props.history.push("posts");
+                props.history.push("/");
               } else {
                 setFormErrorMessage('Check out your Account or Password again')
               }
             })
             .catch(err => {
-              setFormErrorMessage('Check out your Account or Password again')
+              setFormErrorMessage(err)
               setTimeout(() => {
                 setFormErrorMessage("")
               }, 3000);
@@ -91,31 +92,31 @@ function LoginPage(props) {
 
             <div className="formWrapper" style={{ backgroundColor: 'white', padding: '2rem' }}>
 
-              <Title level={2}>Login</Title>
+              <Title level={2}>Login </Title>
               <form onSubmit={handleSubmit} style={{ width: '350px' }}>
 
                 <Form.Item required>
                   <Input
-                    id="account"
-                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                    placeholder="Account."
-                    type="text"
-                    value={values.account}
+                    id="email"
+                    prefix={<UserOutlined />}
+                    placeholder="Enter your email"
+                    type="email"
+                    value={values.email}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     className={
-                      errors.account && touched.account ? 'text-input error' : 'text-input'
+                      errors.email && touched.email ? 'text-input error' : 'text-input'
                     }
                   />
-                  {errors.account && touched.account && (
-                    <div className="input-feedback">{errors.account}</div>
+                  {errors.email && touched.email && (
+                    <div className="input-feedback">{errors.email}</div>
                   )}
                 </Form.Item>
 
                 <Form.Item required>
                   <Input
                     id="password"
-                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    prefix={<LockOutlined />}
                     placeholder="password."
                     type="password"
                     value={values.password}
@@ -137,11 +138,11 @@ function LoginPage(props) {
                 <Form.Item>
                   <Checkbox id="rememberMe" onChange={handleRememberMe} checked={rememberMe} >Remember me</Checkbox>
                   <a className="login-form-forgot" href="/reset_password" style={{ float: 'right' }}>
-                  forgot password
+                    forgot password
                   </a>
                   <div>
                     <Button type="primary" htmlType="submit" className="login-form-button" style={{ minWidth: '100%' }} disabled={isSubmitting} onSubmit={handleSubmit}>
-                    Log in
+                      Log in
                   </Button>
                   </div>
                   Or <a href="/register">register now!</a>

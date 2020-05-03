@@ -10,41 +10,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 14px;
-  line-height: 1.5;
-  color: #24292e;
-  background-color: #fff;
-}
-
-.app {
-  flex-direction: column;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-iframe {
-  min-height: 300px;
-}
-
-input.error {
-  border-color: red;
-}
-
-.input-feedback {
-  color: red;
-  height: 5px;
-  margin-top: -12px;
-}
-
-.ql-editor.ql-blank {
-  min-height: 300px;
-}
-
 /* Highlight */
 pre {
   padding: 10px;
@@ -58,14 +23,44 @@ pre {
   box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
 }
 
-.ant-input-search.ant-input-affix-wrapper {
-  width: 300px;
-}
-
 .ql-editor {
   min-height: 300px;
 }
 
+.app {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 700px;
+}
+
+.wrapper {
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
+}
+
+.contentsWrap {
+  position: relative;
+  max-width: 1200px;
+  margin: 0px auto 0px;
+  padding: 16px 16px 50px;
+  box-sizing: border-box;
+  min-height: 83vh;
+}
+
+.contentsWrapSpacer {
+  height: 68px;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .contentsWrapSpacer {
+    height: 50px;
+    display: block;
+  }
+}
 
 /* =================================
             Scroll-y 

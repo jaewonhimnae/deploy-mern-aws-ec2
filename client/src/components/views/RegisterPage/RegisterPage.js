@@ -3,7 +3,8 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { registerUser } from "../../../_actions/user_actions";
 import { useDispatch } from "react-redux";
-import { Form, Input, Button, Select } from 'antd';
+import { Form, Input, Button, Select, Typography } from 'antd';
+const { Title } = Typography
 const { Option } = Select;
 
 const formItemLayout = {
@@ -98,7 +99,8 @@ function RegisterPage(props) {
         } = props;
         return (
           <div className="app">
-            <h2>Sign up </h2>
+            <Title level={2}>Sign up </Title>
+
             <Form style={{ minWidth: '375px' }} {...formItemLayout} onSubmit={handleSubmit} >
 
               <Form.Item required label="account">
