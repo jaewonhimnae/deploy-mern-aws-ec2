@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node server/index.js",
-    "backend": "nodemon server/index.js --exec babel-node --presets babel-preset-env",
+    "backend": "nodemon server/index.js",
     "frontend": "npm run start --prefix client",
     "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\""
   },
@@ -33,9 +33,6 @@
   "devDependencies": {
     "concurrently": "^4.1.0",
     "nodemon": "^1.19.1",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-preset-env": "^1.7.0",
     "morgan": "^1.9.1"
   }
 }

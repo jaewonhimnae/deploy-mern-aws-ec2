@@ -1,12 +1,12 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import path from 'path';
-import cors from 'cors';
-import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
-import morgan from 'morgan';
-import config from './config/key';
-import helmet from 'helmet';
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
+const path = require('path');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const helmet = require('helmet');
+const config = require('./config/key');
 
 const app = express();
 

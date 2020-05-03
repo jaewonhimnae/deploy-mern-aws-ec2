@@ -1,5 +1,5 @@
-import moment from 'moment';
-import { User } from '../models/user';
+const moment = require('moment');
+const { User } = require('../models/user');
 
 let auth = (req, res, next) => {
   const token = req.header('x_token');
