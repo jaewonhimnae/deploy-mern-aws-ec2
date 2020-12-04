@@ -7,7 +7,7 @@
     "antd": "^4.2.0",
     "axios": "^0.18.0",
     "formik": "^1.5.8",
-    "highlight.js": "^9.17.1",
+    "highlight.js": "^10.4.1",
     "immutable": "^4.0.0-rc.12",
     "moment": "^2.24.0",
     "node-sass": "^4.13.0",
