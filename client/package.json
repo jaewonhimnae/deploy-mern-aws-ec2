@@ -10,7 +10,7 @@
     "highlight.js": "^9.17.1",
     "immutable": "^4.0.0-rc.12",
     "moment": "^2.24.0",
-    "node-sass": "^4.13.0",
+    "node-sass": "^7.0.0",
     "react": "^16.8.6",
     "react-app-polyfill": "^1.0.5",
     "react-dom": "^16.8.6",
